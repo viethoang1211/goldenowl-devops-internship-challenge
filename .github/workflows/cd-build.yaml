@@ -1,0 +1,29 @@
+name: CD build
+
+on:
+  workflow_run:
+    workflows: ["CI build"]
+    types: 
+      - completed
+
+jobs:
+  deploy-to-ec2:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Pull Docker image
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+
+      run: docker pull $DOCKERHUB_USERNAME/golden-owl-test:latest
+
+    - name: Bring down container
+      working-directory: src
+      run:
+        docker-compose down || true
+
+    - name: Start container
+      working-directory: src
+      run:
+        docker-compose up -d
