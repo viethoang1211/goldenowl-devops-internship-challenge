@@ -6,6 +6,7 @@ on:
     types: 
       - completed
 
+
 jobs:
   deploy-to-ec2:
     runs-on: self-hosted
