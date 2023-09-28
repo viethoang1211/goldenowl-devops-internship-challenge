@@ -21,8 +21,10 @@ jobs:
 
     - name: Bring down container
       run:
-        sudo docker-compose down || true
+        sudo docker rm -f golden-owl-test || true
 
     - name: Start container
+      env:
+        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
       run:
-        sudo docker-compose up -d
+        sudo docker run -d -p 3001:3001 --name golden-owl-test $DOCKERHUB_USERNAME/golden-owl-test:latest
