@@ -17,14 +17,12 @@ jobs:
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
 
-      run: docker pull $DOCKERHUB_USERNAME/golden-owl-test:latest
+      run: sudo docker pull $DOCKERHUB_USERNAME/golden-owl-test:latest
 
     - name: Bring down container
-      working-directory: src
       run:
-        docker-compose down || true
+        sudo docker-compose down || true
 
     - name: Start container
-      working-directory: src
       run:
-        docker-compose up -d
+        sudo docker-compose up -d
