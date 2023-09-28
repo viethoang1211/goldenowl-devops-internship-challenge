@@ -33,7 +33,7 @@ jobs:
       
   build:
     runs-on: ubuntu-latest
-    needs: tests
+    needs: test
 
     steps:
       - name: Check out
@@ -51,6 +51,6 @@ jobs:
         run: |
           docker build -t $DOCKERHUB_USERNAME/golden-owl-test:latest .
           docker push $DOCKERHUB_USERNAME/golden-owl-test:latest
-          
+
 
 
