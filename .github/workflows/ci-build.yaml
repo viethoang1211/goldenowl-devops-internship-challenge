@@ -30,6 +30,7 @@ jobs:
             echo "test failure"
             exit 1
           fi
+        working-directory: src
       
   build:
     runs-on: ubuntu-latest
